@@ -1,0 +1,43 @@
+{
+    "name": "ryancco/laravel-pages",
+    "description": "Static pages in your Laravel application",
+    "keywords": [
+        "laravel",
+        "static",
+        "high-voltage"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ryan Colson",
+            "email": "ryanccolson@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4|^9.0",
+        "orchestra/testbench": "^4.0|^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ryancco\\Pages\\": "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ryancco\\Pages\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ryancco\\Pages\\PagesServiceProvider"
+            ]
+        }
+    }
+}

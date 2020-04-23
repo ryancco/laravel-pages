@@ -1,0 +1,1 @@
+It handles multi-level directory structures.
