@@ -2,9 +2,11 @@
 
 namespace Ryancco\Pages\Tests;
 
+use Illuminate\Support\Facades\Config;
 use Ryancco\Pages\Events\IncomingPageRequest;
 use Ryancco\Pages\Events\PageFound;
 use Ryancco\Pages\Events\PageNotFound;
+use Ryancco\Pages\Http\Controllers\PagesController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PagesControllerTest extends TestCase
@@ -70,5 +72,18 @@ class PagesControllerTest extends TestCase
         ]);
 
         $this->get('testing/test');
+    }
+
+    /** @test */
+    public function loads_the_configured_middleware(): void
+    {
+        $this->assertEquals([
+            \Ryancco\Pages\Tests\Mocks\MockMiddleware::class
+        ], $this->app
+            ->make(\Illuminate\Routing\Router::class)
+            ->getRoutes()
+            ->getByAction(PagesController::class)
+            ->gatherMiddleware()
+        );
     }
 }

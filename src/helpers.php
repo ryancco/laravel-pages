@@ -10,8 +10,6 @@ if (!function_exists('page')) {
      */
     function page($name)
     {
-        return url(
-            rtrim(config('pages.route.prefix'), '/') . '/' . \Illuminate\Support\Str::replaceArray('.', ['/'], $name)
-        );
+        return \Ryancco\Pages\Pages::url($name);
     }
 }

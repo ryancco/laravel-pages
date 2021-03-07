@@ -11,6 +11,13 @@ return [
         /*
          * The route prefix to serve all of your static pages from.
          */
-        'prefix' => 'pages'
+        'prefix' => 'pages',
+
+        /**
+         * The middleware that your static pages should be served through.
+         */
+        'middleware' => [
+            \Illuminate\Session\Middleware\StartSession::class
+        ],
     ]
 ];

@@ -18,10 +18,13 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         $app['config']->set('pages', [
             'views' => [
-                'path' => __DIR__ . '/pages'
+                'path' => __DIR__.'/pages',
             ],
             'route' => [
-                'prefix' => 'testing'
+                'prefix' => 'testing',
+                'middleware' => [
+                    \Ryancco\Pages\Tests\Mocks\MockMiddleware::class
+                ]
             ]
         ]);
 
@@ -33,7 +36,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
      */
     protected function registerRoutes(): void
     {
-        Route::get(config('pages.route.prefix') . '/specific', function () {
+        Route::get(config('pages.route.prefix').'/specific', function () {
             return 'This is not a wildcard route';
         });
     }
