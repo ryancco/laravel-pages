@@ -2,13 +2,13 @@
 
 namespace Ryancco\Pages\Events;
 
-use Ryancco\Pages\Http\Requests\PageRequest;
+use Illuminate\Http\Request;
 
 class IncomingPageRequest
 {
     public $request;
 
-    public function __construct(PageRequest $request)
+    public function __construct(Request $request)
     {
         $this->request = $request;
     }

@@ -2,18 +2,21 @@
 
 namespace Ryancco\Pages\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Ryancco\Pages\Events\IncomingPageRequest;
 use Ryancco\Pages\Events\PageFound;
 use Ryancco\Pages\Events\PageNotFound;
-use Ryancco\Pages\Http\Requests\PageRequest;
+use Ryancco\Pages\Pages;
 
 class PagesController
 {
-    public function __invoke(PageRequest $request)
+    public function __invoke(Request $request)
     {
         event(new IncomingPageRequest($request));
 
-        if (! view()->exists($request->view())) {
+        $page = Pages::getViewNameFromPath($request->path());
+
+        if (! Pages::exists($page)) {
             event(new PageNotFound($request));
 
             abort(404);
@@ -21,6 +24,6 @@ class PagesController
 
         event(new PageFound($request));
 
-        return view($request->view());
+        return Pages::view($page);
     }
 }
