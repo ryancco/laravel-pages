@@ -3,6 +3,7 @@
 namespace Ryancco\Pages;
 
 use Illuminate\Support\ServiceProvider;
+use Ryancco\Pages\Http\Controllers\PagesController;
 
 class PagesServiceProvider extends ServiceProvider
 {
