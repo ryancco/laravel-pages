@@ -2,6 +2,9 @@
 
 namespace Ryancco\Pages\Tests;
 
+use Ryancco\Pages\Events\IncomingPageRequest;
+use Ryancco\Pages\Events\PageFound;
+use Ryancco\Pages\Events\PageNotFound;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PagesControllerTest extends TestCase
@@ -23,12 +26,17 @@ class PagesControllerTest extends TestCase
     }
 
     /** @test */
-    public function throws_an_exception_if_view_is_missing(): void
+    public function throws_an_exception_and_fires_expected_events_if_view_is_missing(): void
     {
         $this->expectException(NotFoundHttpException::class);
 
+        $this->expectsEvents([
+            IncomingPageRequest::class,
+            PageNotFound::class,
+        ]);
+
         $this->get('testing/missing')
-        ->assertNotFound();
+            ->assertNotFound();
     }
 
     /** @test */
@@ -51,5 +59,16 @@ class PagesControllerTest extends TestCase
         $this->get('testing/specific')
             ->assertSee('This is not a wildcard route')
             ->assertOk();
+    }
+
+    /** @test */
+    public function fires_expected_events(): void
+    {
+        $this->expectsEvents([
+            IncomingPageRequest::class,
+            PageFound::class,
+        ]);
+
+        $this->get('testing/test');
     }
 }
