@@ -7,9 +7,11 @@ use Symfony\Component\Finder\Finder;
 
 class Manager
 {
-    public function view(string $page)
+    private $variables = [];
+
+    public function render(string $page)
     {
-        return view()->make($page);
+        return view()->make($page, $this->getVariables());
     }
 
     public function url(string $page): string
@@ -72,11 +74,23 @@ class Manager
         return collect(
             Finder::create()
                 ->files()
-                ->name(['*.blade.php'])
+                ->name(['*.blade.php', '*.html'])
                 ->in($this->path())
                 ->sortByName()
         )->map(fn($file) => $file->getRelativePathname())
             ->values()
             ->toArray();
+    }
+
+    public function setVariable($key, $value = null): void
+    {
+        $variables = is_array($key) ? $key : [$key => $value];
+
+        $this->variables = array_merge($this->variables, $variables);
+    }
+
+    public function getVariables(): array
+    {
+        return $this->variables;
     }
 }

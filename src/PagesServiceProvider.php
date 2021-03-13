@@ -20,7 +20,7 @@ class PagesServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/pages.php', 'pages');
-        $this->app->bind('pages', fn() => new Manager);
+        $this->app->singleton('pages', fn() => new Manager);
     }
 
     private function publish()

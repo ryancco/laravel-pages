@@ -24,6 +24,6 @@ class PagesController
 
         event(new PageFound($request));
 
-        return Pages::view($page);
+        return Pages::render($page);
     }
 }
