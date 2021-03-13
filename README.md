@@ -1,6 +1,6 @@
 # Laravel Pages
 ![Packagist](https://img.shields.io/packagist/l/ryancco/laravel-pages?style=flat-square)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ryancco/laravel-pages/tests?style=flat-square)
+![GitHub Workflow Status](https://github.com/ryancco/laravel-pages/actions/workflows/tests.yml/badge.svg?style=flat-square)
 ![Packagist](https://img.shields.io/packagist/dm/ryancco/laravel-pages?style=flat-square)
 
 
