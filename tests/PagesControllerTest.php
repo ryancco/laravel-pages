@@ -2,11 +2,11 @@
 
 namespace Ryancco\Pages\Tests;
 
-use Illuminate\Support\Facades\Config;
 use Ryancco\Pages\Events\IncomingPageRequest;
 use Ryancco\Pages\Events\PageFound;
 use Ryancco\Pages\Events\PageNotFound;
 use Ryancco\Pages\Http\Controllers\PagesController;
+use Ryancco\Pages\Pages;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PagesControllerTest extends TestCase
@@ -85,5 +85,22 @@ class PagesControllerTest extends TestCase
             ->getByAction(PagesController::class)
             ->gatherMiddleware()
         );
+    }
+
+    /** @test */
+    public function passes_stored_variables_to_the_view(): void
+    {
+        Pages::setVariable('single', 'value');
+        Pages::setVariable([
+            'foo' => 'bar',
+            'baz' => 'qwex',
+        ]);
+
+        $this->get('testing/test')
+            ->assertViewHas([
+                'single' => 'value',
+                'foo' => 'bar',
+                'baz' => 'qwex'
+            ]);
     }
 }

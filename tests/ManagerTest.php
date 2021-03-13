@@ -43,4 +43,22 @@ class ManagerTest extends TestCase
             (new Manager)->url('test.page.multi')
         );
     }
+
+    /** @test */
+    public function stores_and_retrieves_variables(): void
+    {
+        $manager = new Manager;
+
+        $manager->setVariable('single', 'value');
+        $manager->setVariable([
+            'foo' => 'bar',
+            'baz' => 'qwex',
+        ]);
+
+        $this->assertEquals([
+            'single' => 'value',
+            'foo' => 'bar',
+            'baz' => 'qwex'
+        ], $manager->getVariables());
+    }
 }
