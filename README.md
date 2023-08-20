@@ -1,3 +1,5 @@
+> This package has been archived. If you're looking for similar functionality, check out Laravel Folio.
+
 # Laravel Pages
 ![Packagist](https://img.shields.io/packagist/l/ryancco/laravel-pages?style=flat-square)
 ![GitHub Workflow Status](https://github.com/ryancco/laravel-pages/actions/workflows/tests.yml/badge.svg?style=flat-square)
